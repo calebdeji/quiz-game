@@ -1,29 +1,33 @@
 * {
-    box-sizing: border-box'
-
+  box-sizing: 'border-box';
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 main {
-    background-color: burlywood;
-    margin-top: 3em;
-    display: flex;
-    width: 600px;
-    height: 400px;
-    justify-content: center;
-    /* align-content: center; */
-    align-items: center;
+  background-color: burlywood;
+  margin-top: 3em;
+  display: flex;
+  width: 600px;
+  height: 400px;
+  justify-content: center;
+  /* align-content: center; */
+  align-items: center;
+  flex-direction: column;
 }
 
 main .quiz-main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+p.input {
+  display: inline;
 }
