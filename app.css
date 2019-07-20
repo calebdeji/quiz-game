@@ -8,6 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 main {
@@ -30,4 +31,15 @@ main .quiz-main {
 
 p.input {
   display: inline;
+}
+
+body .over-lay {
+  display: none;
+  position: absolute;
+  height: 500px;
+  width: 95%;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  background-color: burlywood;
 }

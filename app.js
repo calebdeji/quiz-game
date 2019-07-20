@@ -259,6 +259,9 @@ const displayScore = () => {
         console.log("Hello, closed succesfully");
     };
     deleteDatabaseFunc(); // write the function
+    //to display modal to the user
+    let modalVar = document.getElementsByClassName("over-lay")[0];
+    modalVar.style.display = "flex";
 };
 const deleteDatabaseFunc = () => {
     let request = window.indexedDB.deleteDatabase("counter");
@@ -273,3 +276,9 @@ const deleteDatabaseFunc = () => {
 document.getElementById("submit").addEventListener("click", () => {
     setNextQuestion(0);
 });
+document.getElementById('replay').addEventListener("click", () => {
+    window.location = "app.html"
+});
+document.getElementById('close').addEventListener("click", () => {
+    // document.close(); // coming back to input the code that closes the tab page;
+})
