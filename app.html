@@ -1,47 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="app.css" />
+    <title>Quiz Game</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="app.css" />
-  <title>Quiz Game</title>
-</head>
+  <body>
+    <main>
+      <h2>Your Favourite Quiz Game</h2>
+      <div class="quiz-main">
+        <h4 class="question" id="question"></h4>
+        <div class="choice-answer">
+          <form action="javascript:void(0)" method="post">
+            <input type="radio" name="choice-answer" id="first" value="" />
+            <p class="input"></p>
+            <input type="radio" name="choice-answer" id="second" value="" />
+            <p class="input"></p>
+            <input type="radio" name="choice-answer" id="third" value="" />
+            <p class="input"></p>
+            <input type="radio" name="choice-answer" id="fourth" value="" />
+            <p class="input"></p>
+            <div class="submit-button">
+              <!-- <input type="submit" value="Previous" id="previous"> -->
+              <input type="submit" value="Next" id="submit" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
 
-<body>
-  <main>
-    <h2>Your Favourite Quiz Game</h2>
-    <div class="quiz-main">
-      <h4 class="question" id="question"></h4>
-      <div class="choice-answer">
-        <form action="javascript:void(0)" method="post">
-          <input type="radio" name="choice-answer" id="first" value="">
-          <p class="input"></p>
-          <input type="radio" name="choice-answer" id="second" value="">
-          <p class="input"></p>
-          <input type="radio" name="choice-answer" id="third" value="">
-          <p class="input"></p>
-          <input type="radio" name="choice-answer" id="fourth" value="">
-          <p class="input"></p>
-          <div style="margin-top:1em;">
-            <!-- <input type="submit" value="Previous" id="previous"> -->
-            <input type="submit" value="Next" id="submit">
-          </div>
-        </form>
+    <div class="over-lay w3-animate-zoom">
+      <h2 id="score"></h2>
+      <p>Would You Like To Quit or Play Again?</p>
+      <div class="main-over-lay">
+        <button id="replay">Yay! Play Again!</button>
+        <button id="close">Nah, I'm good</button>
       </div>
     </div>
-  </main>
-
-  <div class="over-lay">
-    <div class="main-over-lay">
-      <h2 id="score"></h2>
-      <label> Would You Like To Quit or Play Again?</label>
-      <button id="replay">Yay! Play Again!</button>
-      <button id="close">Nah, I'm good</button>
-    </div>
-  </div>
-  <script src="app.js"></script>
-</body>
-
+    <script src="app.js"></script>
+  </body>
 </html>
