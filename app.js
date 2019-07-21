@@ -183,12 +183,24 @@ async function setNextQuestion(id) {
 }
 const saveAnswerChosenToDataBase = () => {
     let inputArrays = document.getElementsByName("choice-answer");
+    let counterRadio = 0;
     for (let counter = 0; counter < inputArrays.length; counter++) {
         if (inputArrays[counter].checked === true) {
             arrContent.push(inputArrays[counter].id);
+            counterRadio += 1;
+        }
+
+        // console.log("arrContent[until ", counter, "] : ", arrContent);
+    }
+    if (counterRadio == 0) {
+        let answersChosenLength = arrContent.length;
+        if (answersChosenLength !== 0) {
+            arrContent[answersChosenLength - 1] = "unanswered";
+        } else {
+            arrContent[0] = "unanswered";
         }
     }
-    // console.log("arrContent is : ", arrContent);
+    console.log("arrContent is : ", arrContent);
 };
 let arrAnswer = [{
         id: 1,
@@ -271,14 +283,13 @@ const deleteDatabaseFunc = () => {
     request.onerror = err => {
         console.log("Couldn't delete database. Err : ", err);
     };
-
 };
 document.getElementById("submit").addEventListener("click", () => {
     setNextQuestion(0);
 });
-document.getElementById('replay').addEventListener("click", () => {
-    window.location = "app.html"
+document.getElementById("replay").addEventListener("click", () => {
+    window.location = "app.html";
 });
-document.getElementById('close').addEventListener("click", () => {
+document.getElementById("close").addEventListener("click", () => {
     // document.close(); // coming back to input the code that closes the tab page;
-})
+});
