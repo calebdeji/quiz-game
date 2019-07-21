@@ -3,13 +3,7 @@ window.addEventListener("resize", () => {
     let bodyVar = document.getElementsByTagName("body");
     bodyVar[0].style.height = heightVar;
 });
-window.addEventListener("load", () => {
-    let heightVar = window.innerHeight;
-    let bodyVar = document.getElementsByTagName("body");
-    bodyVar[0].style.height = heightVar + "px";
-    deleteDatabaseFunc();
-    setNextQuestion(0);
-});
+
 let arrayQuestions = [{
         id: 1,
         question: "Which of the following items was owned by the fewest U.S homes in 1990?",
@@ -125,61 +119,63 @@ const getQuestion = id => {
     });
 };
 async function setNextQuestion(id) {
-    let db = await getQuestion(id);
-    let idAcquired = id;
-    let correspondingObjIndex;
-    let request = db
-        .transaction(["id-getQuestion"], "readwrite")
-        .objectStore("id-getQuestion");
-    request.openCursor().onsuccess = event => {
-        let cursor = event.target.result;
-        if (cursor) {
-            let id = cursor.value.idSaved;
-            if (id < 5) {
-                for (let arrayCount = 0; arrayCount < arrayNum.length; arrayCount++) {
-                    if (arrayCount == id) {
-                        correspondingObjIndex = arrayNum[id];
-                    }
-                }
-                // console.log("To display is ", arrayQuestions[correspondingObjIndex]);
-                let correspondingObjToDisplay = arrayQuestions[correspondingObjIndex];
-                document.getElementById("question").innerHTML =
-                    correspondingObjToDisplay.question;
-                let inputValues = document.getElementsByClassName("input");
-                // getQuestion(id + 1);
-                for (let inputCounter = 0; inputCounter < 4; inputCounter++) {
-                    for (objCounter = 0; objCounter < 4; objCounter++) {
-                        if (inputCounter === objCounter) {
-                            inputValues[objCounter].innerHTML =
-                                correspondingObjToDisplay.answers[objCounter];
-                            // console.log(
-                            //    "array is : ",
-                            //    correspondingObjToDisplay.answers[objCounter]
-                            //);
+    return new Promise(async (resolve, reject) => {
+        let db = await getQuestion(id);
+        let idAcquired = id;
+        let correspondingObjIndex;
+        let request = db
+            .transaction(["id-getQuestion"], "readwrite")
+            .objectStore("id-getQuestion");
+        request.openCursor().onsuccess = event => {
+            let cursor = event.target.result;
+            if (cursor) {
+                let id = cursor.value.idSaved;
+                if (id < 5) {
+                    for (let arrayCount = 0; arrayCount < arrayNum.length; arrayCount++) {
+                        if (arrayCount == id) {
+                            correspondingObjIndex = arrayNum[id];
                         }
                     }
+                    // console.log("To display is ", arrayQuestions[correspondingObjIndex]);
+                    let correspondingObjToDisplay = arrayQuestions[correspondingObjIndex];
+                    document.getElementById("question").innerHTML = correspondingObjToDisplay.question;
+                    let inputValues = document.getElementsByClassName("input");
+                    // getQuestion(id + 1);
+                    for (let inputCounter = 0; inputCounter < 4; inputCounter++) {
+                        for (objCounter = 0; objCounter < 4; objCounter++) {
+                            if (inputCounter === objCounter) {
+                                inputValues[objCounter].innerHTML =
+                                    correspondingObjToDisplay.answers[objCounter];
+                                // console.log(
+                                //    "array is : ",
+                                //    correspondingObjToDisplay.answers[objCounter]
+                                //);
+                            }
+                        }
+                    }
+                    request.get("value").onsuccess = event => {
+                        let data = event.target.result;
+                        data.idSaved += 1;
+                        let requestNew = request.put(data);
+                        requestNew.onsuccess = () => {
+                            // console.log(idAcquired + 1, "Updated successfully!");
+                        };
+                        requestNew.onerror = err => {
+                            // console.log("Unable to update data ", err);
+                        };
+                    };
+                    resolve(saveAnswerChosenToDataBase());
+                    cursor.continue();
+                } else {
+                    // console.log("End of question");
+                    resolve(saveAnswerChosenToDataBase());
+                    document.getElementById("submit").value = "Submit";
+                    displayScore();
                 }
-                request.get("value").onsuccess = event => {
-                    let data = event.target.result;
-                    data.idSaved += 1;
-                    let requestNew = request.put(data);
-                    requestNew.onsuccess = () => {
-                        // console.log(idAcquired + 1, "Updated successfully!");
-                    };
-                    requestNew.onerror = err => {
-                        // console.log("Unable to update data ", err);
-                    };
-                };
-                saveAnswerChosenToDataBase();
-                cursor.continue();
-            } else {
-                // console.log("End of question");
-                saveAnswerChosenToDataBase();
-                document.getElementById("submit").value = "Submit";
-                displayScore();
             }
-        }
-    };
+
+        };
+    })
 }
 const saveAnswerChosenToDataBase = () => {
     let inputArrays = document.getElementsByName("choice-answer");
@@ -195,12 +191,13 @@ const saveAnswerChosenToDataBase = () => {
     if (counterRadio == 0) {
         let answersChosenLength = arrContent.length;
         if (answersChosenLength !== 0) {
-            arrContent[answersChosenLength - 1] = "unanswered";
+            arrContent.push("unaswered");
         } else {
             arrContent[0] = "unanswered";
         }
     }
     console.log("arrContent is : ", arrContent);
+    return arrContent;
 };
 let arrAnswer = [{
         id: 1,
@@ -293,3 +290,20 @@ document.getElementById("replay").addEventListener("click", () => {
 document.getElementById("close").addEventListener("click", () => {
     // document.close(); // coming back to input the code that closes the tab page;
 });
+window.addEventListener("load", async () => {
+    let heightVar = window.innerHeight;
+    let bodyVar = document.getElementsByTagName("body");
+    bodyVar[0].style.height = heightVar + "px";
+    deleteDatabaseFunc();
+    setNextQuestion(0).then((value) => {
+        emptyArrContent(value);
+    });
+    // saveAnswerChosenToDataBase();
+
+});
+const emptyArrContent = (value) => {
+    console.log("arrContent : ", arrContent)
+    value.shift();
+    console.log("arrContent : ", arrContent)
+    console.log("Value is ", value);
+}
