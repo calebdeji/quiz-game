@@ -1,21 +1,23 @@
 /**
  *
- * Ogunwale Pelumi Caleb
- * https://twitter.com/calebdeji06
- * https://github.com/calebdeji
- * https://dev.to/calebdeji
+ * Developer : Ogunwale Pelumi Caleb
+ * 
+ * Details :
+ * 
+ *	*Twitter : https://twitter.com/calebdeji06
+ *	*Github : https://github.com/calebdeji
+ *	*Dev.to : https://dev.to/calebdeji
+ *  *website : https://calebdeji.github.io
  *
- */
+ **/
+/*************************************** */
 
-window.addEventListener("resize", () => {
-	let heightVar = window.innerHeight;
-	let bodyVar = document.getElementsByTagName("body");
-	bodyVar[0].style.height = heightVar;
-});
 /*
+ *
  * To receive the set of questions and respective anwsers from the json file on the server;
  * xmlhttp for the request of questions on the server
  *xmlhttp for the request of answers on the server;
+ *
  */
 const xmlhttp = new XMLHttpRequest();
 const urlQuestion = "json/question.json";
@@ -38,22 +40,25 @@ xmlhttpAnswer.open("GET", urlAnswer, true);
 xmlhttp.send();
 xmlhttpAnswer.send();
 
+/*==========*********************************************************================ */
 let arrContent = []; //this holds the answer picked by the user
-// to generate any 5 numbers;
+/**
+ * To generate any five random numbers to allocate to the index of the question arrays to be displayed
+ * 
+ */
 let arrayNum = []; // this arrays holds the five random numbers generated;
 const genNum = Math.floor(Math.random() * 10);
 arrayNum.push(genNum);
-for (let counter = 0; counter < 4; counter++) {
+for (let counter = 0; counter < 4; counter++) { //the counter is less than five because we already initialise arrayNum[0] with genNum
 	let newGen = Math.floor(Math.random() * 10);
 	while (arrayNum.lastIndexOf(newGen) !== -1) {
 		newGen = Math.floor(Math.random() * 10);
 	}
 	arrayNum.push(newGen);
 }
-console.log(arrayNum);
 
-//console.log("ArrayNum is : ", arrayNum);
-//generation done!;
+/*============================ generation done!===============================*/
+
 /* *************************************************************** */
 /*
  * the below function saves initial counter of value 0 to the database
@@ -82,7 +87,7 @@ const getQuestion = id => {
 		};
 	});
 };
-/* ************************************************************* */
+/* ******************************======================******************************* */
 /*
  * this is the first function called after successful loading of the web page
  * this function diplays individual question generated from the json file to the browser
@@ -187,32 +192,25 @@ const displayScore = () => {
 	let score = 0;
 	// let arrayNumScope = arrayNum;
 	let arrayQuestionsPicked = [];
-	// let arrAnswersChosen = arrContent;
 	let arrAnswersCompare = [];
 	for (let counter = 0; counter < arrayNum.length; counter++) {
 		arrayQuestionsPicked.push(arrayQuestions[arrayNum[counter]]);
 		arrAnswersCompare.push(arrAnswer[arrayNum[counter]]);
 	}
-	//console.log("array of questions picked : ", arrayQuestionsPicked);
-	//console.log("array of answers to compare : ", arrAnswersCompare);
-	//console.log("answer chosen : ", arrContent);
 	for (let counter = 0; counter < arrayQuestionsPicked.length; counter++) {
 		if (arrAnswersCompare[counter].answer == arrContent[counter]) {
 			score += 1;
 		}
 	}
-
-	//console.log("Overall Score is : ", score);
 	document.getElementById("score").innerHTML =
 		"Your score is : " + score + " / 5";
-	//to empty the idsved object Store
+	/**to close the opened database */
 	let request = window.indexedDB.open("counter", 1);
 	request.onsuccess = () => {
 		let db = request.result;
 		db.close();
-		//console.log("Hello, closed succesfully");
 	};
-	deleteDatabaseFunc(); // write the function
+	deleteDatabaseFunc(); // deletes the database counter
 	//to display modal to the user
 	let modalVar = document.getElementsByClassName("over-lay")[0];
 	modalVar.style.display = "flex";
@@ -225,11 +223,9 @@ const displayScore = () => {
  */
 const deleteDatabaseFunc = () => {
 	let request = window.indexedDB.deleteDatabase("counter");
-	request.onsuccess = () => {
-		//console.log("database deleted");
-	};
+	request.onsuccess = () => {};
 	request.onerror = err => {
-		//console.log("Couldn't delete database. Err : ", err);
+		console.log("Couldn't delete database. Err : ", err);
 	};
 };
 /* ****************************************************** */
@@ -238,10 +234,7 @@ const deleteDatabaseFunc = () => {
  *
  */
 const emptyArrContent = value => {
-	//console.log("arrContent : ", arrContent);
 	value.shift();
-	//console.log("arrContent : ", arrContent);
-	//console.log("Value is ", value);
 };
 
 document.getElementById("submit").addEventListener("click", () => {
