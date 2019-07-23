@@ -1,0 +1,66 @@
+[{
+        "id": 1,
+        "question": "Which of the following items was owned by the fewest U.S homes in 1990?",
+        "answers": [
+            "home Computer",
+            "compact disk player",
+            "cordless phone",
+            "dishwater"
+        ]
+    },
+    {
+        "id": 2,
+        "question": "In 1990, in what percentage of U.S married couples did the wife earn more money than the husband?",
+        "answers": ["8", "18", "38", "58"]
+    },
+    {
+        "id": 3,
+        "question": "The first black American pictured on a U.S postage stamp was who?",
+        "answers": [
+            "Frederick Douglass",
+            "Booker T. Washington",
+            "Louis Armstrong",
+            "Joe Louis"
+        ]
+    },
+    {
+        "id": 4,
+        "question": "What did the 'D' in 'D-Day' stand for?",
+        "answers": ["doom", "day", "Dwight", "Dunkirk"]
+    },
+    {
+        "id": 5,
+        "question": "which of the following characters turned 40 years old in 1990?",
+        "answers": ["Charlie Brown", "Bugs Bunny", "Mickey Mouse", "Fred Flintstone"]
+    },
+    {
+        "id": 6,
+        "question": "The Philadelphia mint started putting a 'P' mint maek on quarters when ?",
+        "answers": ["1960", "1980", "never", "1958"]
+    },
+    {
+        "id": 7,
+        "question": "In J.Edgar Hoover, what did the J stand for?",
+        "answers": ["James", "John", "Joseph", "Jack"]
+    },
+    {
+        "id": 8,
+        "question": "When did the Liberty bell get its name?",
+        "answers": [
+            "when it was made in 1701",
+            "when it rang on July 4, 1776",
+            "in the 19th century, whent it became a symbol of the abolition of slavery",
+            "none"
+        ]
+    },
+    {
+        "id": 9,
+        "question": "Cleromancy is divination involving what?",
+        "answers": ["Dice", "Glass", "Twigs", "Ink"]
+    },
+    {
+        "id": 10,
+        "question": "A person who's a fysigunkuus lacks what?",
+        "answers": ["Humor", "Wisdom", "Curiosity", "Temper"]
+    }
+]
