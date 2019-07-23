@@ -93,7 +93,7 @@ for (let i = 0; i < 5; i++) {
         }
     }
 }
-// console.log("ArrayNum is : ", arrayNum);
+console.log("ArrayNum is : ", arrayNum);
 //to get the questions corresponding to the 5 random numbers
 const getQuestion = id => {
     return new Promise((resolve, reject) => {
@@ -120,6 +120,7 @@ const getQuestion = id => {
 };
 async function setNextQuestion(id) {
     return new Promise(async (resolve, reject) => {
+        // this is necessaary to avoid unanswered bug
         let db = await getQuestion(id);
         let idAcquired = id;
         let correspondingObjIndex;
@@ -138,7 +139,8 @@ async function setNextQuestion(id) {
                     }
                     // console.log("To display is ", arrayQuestions[correspondingObjIndex]);
                     let correspondingObjToDisplay = arrayQuestions[correspondingObjIndex];
-                    document.getElementById("question").innerHTML = correspondingObjToDisplay.question;
+                    document.getElementById("question").innerHTML =
+                        correspondingObjToDisplay.question;
                     let inputValues = document.getElementsByClassName("input");
                     // getQuestion(id + 1);
                     for (let inputCounter = 0; inputCounter < 4; inputCounter++) {
@@ -173,9 +175,8 @@ async function setNextQuestion(id) {
                     displayScore();
                 }
             }
-
         };
-    })
+    });
 }
 const saveAnswerChosenToDataBase = () => {
     let inputArrays = document.getElementsByName("choice-answer");
@@ -260,6 +261,7 @@ const displayScore = () => {
     }
 
     console.log("Overall Score is : ", score);
+    document.getElementById('score').innerHTML = "Your score is : " + score + " / 5";
     //to empty the idsved object Store
     let request = window.indexedDB.open("counter", 1);
     request.onsuccess = () => {
@@ -281,6 +283,12 @@ const deleteDatabaseFunc = () => {
         console.log("Couldn't delete database. Err : ", err);
     };
 };
+const emptyArrContent = value => {
+    console.log("arrContent : ", arrContent);
+    value.shift();
+    console.log("arrContent : ", arrContent);
+    console.log("Value is ", value);
+};
 document.getElementById("submit").addEventListener("click", () => {
     setNextQuestion(0);
 });
@@ -289,21 +297,18 @@ document.getElementById("replay").addEventListener("click", () => {
 });
 document.getElementById("close").addEventListener("click", () => {
     // document.close(); // coming back to input the code that closes the tab page;
+    // window.location = "about:home"
 });
 window.addEventListener("load", async () => {
-    let heightVar = window.innerHeight;
-    let bodyVar = document.getElementsByTagName("body");
-    bodyVar[0].style.height = heightVar + "px";
+    setTimeout(() => {
+        let loader = document.getElementsByClassName("loader-body")[0];
+        loader.style.display = "none";
+        document.getElementById("main").style.display = "flex";
+    }, 10000);
     deleteDatabaseFunc();
-    setNextQuestion(0).then((value) => {
+    setNextQuestion(0).then(value => {
         emptyArrContent(value);
     });
     // saveAnswerChosenToDataBase();
-
+    //preloader
 });
-const emptyArrContent = (value) => {
-    console.log("arrContent : ", arrContent)
-    value.shift();
-    console.log("arrContent : ", arrContent)
-    console.log("Value is ", value);
-}
