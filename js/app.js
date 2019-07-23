@@ -263,7 +263,8 @@ document.getElementById("submit").addEventListener("click", () => {
  */
 
 document.getElementById("replay").addEventListener("click", () => {
-  window.location = "index.html";
+  // window.location = "index.html";
+  location.reload();
 });
 document.getElementById("close").addEventListener("click", () => {
   // document.close(); // coming back to input the code that closes the tab page;
