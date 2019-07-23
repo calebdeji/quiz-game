@@ -18,9 +18,9 @@ window.addEventListener("resize", () => {
  *xmlhttp for the request of answers on the server;
  */
 const xmlhttp = new XMLHttpRequest();
-const urlQuestion = "question.json";
+const urlQuestion = "json/question.json";
 const xmlhttpAnswer = new XMLHttpRequest();
-const urlAnswer = "answer.json";
+const urlAnswer = "json/answer.json";
 let arrayQuestions;
 let arrAnswer;
 xmlhttp.onreadystatechange = () => {
@@ -53,15 +53,15 @@ for (let i = 0; i < 5; i++) {
         let availableNo = Math.floor(Math.random() * 10);
         if (arrayNum.indexOf(availableNo) == -1) {
           arrayNum[i] = availableNo;
-          // console.log("Available no is ", availableNo);
-          // console.log("arrayNum[", i, "] is", arrayNum[i]);
+          // //console.log("Available no is ", availableNo);
+          // //console.log("arrayNum[", i, "] is", arrayNum[i]);
         }
       }
     }
   }
 }
 
-console.log("ArrayNum is : ", arrayNum);
+//console.log("ArrayNum is : ", arrayNum);
 //generation done!;
 /* *************************************************************** */
 /*
@@ -76,7 +76,7 @@ const getQuestion = id => {
       resolve(request.result);
     };
     request.onerror = err => {
-      console.log("unable to open database");
+      //console.log("unable to open database");
     };
     request.onupgradeneeded = event => {
       let db = event.target.result;
@@ -116,7 +116,7 @@ async function setNextQuestion(id) {
               correspondingObjIndex = arrayNum[id];
             }
           }
-          // console.log("To display is ", arrayQuestions[correspondingObjIndex]);
+          // //console.log("To display is ", arrayQuestions[correspondingObjIndex]);
           let correspondingObjToDisplay = arrayQuestions[correspondingObjIndex];
           document.getElementById("question").innerHTML =
             correspondingObjToDisplay.question;
@@ -127,7 +127,7 @@ async function setNextQuestion(id) {
               if (inputCounter === objCounter) {
                 inputValues[objCounter].innerHTML =
                   correspondingObjToDisplay.answers[objCounter];
-                // console.log(
+                // //console.log(
                 //    "array is : ",
                 //    correspondingObjToDisplay.answers[objCounter]
                 //);
@@ -139,16 +139,16 @@ async function setNextQuestion(id) {
             data.idSaved += 1;
             let requestNew = request.put(data);
             requestNew.onsuccess = () => {
-              // console.log(idAcquired + 1, "Updated successfully!");
+              // //console.log(idAcquired + 1, "Updated successfully!");
             };
             requestNew.onerror = err => {
-              // console.log("Unable to update data ", err);
+              // //console.log("Unable to update data ", err);
             };
           };
           resolve(saveAnswerChosenToDataBase());
           cursor.continue();
         } else {
-          // console.log("End of question");
+          // //console.log("End of question");
           resolve(saveAnswerChosenToDataBase());
           document.getElementById("submit").value = "Submit";
           displayScore();
@@ -172,7 +172,7 @@ const saveAnswerChosenToDataBase = () => {
       counterRadio += 1;
     }
 
-    // console.log("arrContent[until ", counter, "] : ", arrContent);
+    // //console.log("arrContent[until ", counter, "] : ", arrContent);
   }
   if (counterRadio == 0) {
     let answersChosenLength = arrContent.length;
@@ -182,7 +182,7 @@ const saveAnswerChosenToDataBase = () => {
       arrContent[0] = "unanswered";
     }
   }
-  console.log("arrContent is : ", arrContent);
+  //console.log("arrContent is : ", arrContent);
   return arrContent;
 };
 /* ********************************************************************* */
@@ -202,16 +202,16 @@ const displayScore = () => {
     arrayQuestionsPicked.push(arrayQuestions[arrayNum[counter]]);
     arrAnswersCompare.push(arrAnswer[arrayNum[counter]]);
   }
-  console.log("array of questions picked : ", arrayQuestionsPicked);
-  console.log("array of answers to compare : ", arrAnswersCompare);
-  console.log("answer chosen : ", arrContent);
+  //console.log("array of questions picked : ", arrayQuestionsPicked);
+  //console.log("array of answers to compare : ", arrAnswersCompare);
+  //console.log("answer chosen : ", arrContent);
   for (let counter = 0; counter < arrayQuestionsPicked.length; counter++) {
     if (arrAnswersCompare[counter].answer == arrContent[counter]) {
       score += 1;
     }
   }
 
-  console.log("Overall Score is : ", score);
+  //console.log("Overall Score is : ", score);
   document.getElementById("score").innerHTML =
     "Your score is : " + score + " / 5";
   //to empty the idsved object Store
@@ -219,7 +219,7 @@ const displayScore = () => {
   request.onsuccess = () => {
     let db = request.result;
     db.close();
-    console.log("Hello, closed succesfully");
+    //console.log("Hello, closed succesfully");
   };
   deleteDatabaseFunc(); // write the function
   //to display modal to the user
@@ -235,10 +235,10 @@ const displayScore = () => {
 const deleteDatabaseFunc = () => {
   let request = window.indexedDB.deleteDatabase("counter");
   request.onsuccess = () => {
-    console.log("database deleted");
+    //console.log("database deleted");
   };
   request.onerror = err => {
-    console.log("Couldn't delete database. Err : ", err);
+    //console.log("Couldn't delete database. Err : ", err);
   };
 };
 /* ****************************************************** */
@@ -247,10 +247,10 @@ const deleteDatabaseFunc = () => {
  *
  */
 const emptyArrContent = value => {
-  console.log("arrContent : ", arrContent);
+  //console.log("arrContent : ", arrContent);
   value.shift();
-  console.log("arrContent : ", arrContent);
-  console.log("Value is ", value);
+  //console.log("arrContent : ", arrContent);
+  //console.log("Value is ", value);
 };
 
 document.getElementById("submit").addEventListener("click", () => {
