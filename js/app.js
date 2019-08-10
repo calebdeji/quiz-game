@@ -255,9 +255,9 @@ document.getElementById("close").addEventListener("click", () => {
 	// window.location = "about:home"
 });
 
-/**************************************************************** */
+/* *************************************************************** */
 
-window.addEventListener("load", async () => {
+window.addEventListener("load", () => {
 	setTimeout(() => {
 		let loader = document.getElementsByClassName("loader-body")[0];
 		loader.style.display = "none";
