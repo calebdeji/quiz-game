@@ -16,7 +16,7 @@ body {
 main {
   background-color: burlywood;
   margin-top: 3em;
-  display: none;
+  /* display: none; */
   width: 600px;
   height: 400px;
   justify-content: center;
@@ -57,7 +57,7 @@ body .over-lay .main-over-lay {
 main .quiz-main .choice-answer .submit-button {
   display: flex;
   margin-top: 2em;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -67,7 +67,7 @@ main .quiz-main {
   padding-right: 1em;
 }
 
-.submit-button input[type="submit"] {
+.submit-button input[type="button"] {
   border-style: none;
   display: block;
   width: 100px;
