@@ -92,23 +92,7 @@ const uiDisplay = () => {
 
 }
 
-/**
- * 
- * @param {*} answer  this parameter in the below function holds the id clicked
- * the function below updates the array of answers picked
- */
 
-const saveAnswer = (answer, counter) => {
-	console.log("answer : ", answer, "and counter : ", counter);
-	for (let i = 0; i < arrContent.length; i++) {
-		if (arrContent.length == counter) {
-			arrContent
-		}
-	}
-
-	console.log(arrContent);
-
-}
 
 
 
