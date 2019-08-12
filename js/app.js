@@ -66,12 +66,13 @@ for (let counter = 0; counter < 4; counter++) {
 /*============================ generation done!===============================*/
 
 /* *************************************************************** */
-/*
- * the below function saves initial counter of value 0 to the database
- * and then return a resolved promise due to the asynchronous nature of the database;
- */
 
+
+/**
+ * the below function changes the data on the ui
+ */
 const uiDisplay = () => {
+
 	if (counter < 5 && counter >= 0) {
 		let arrayCounter = 0;
 		const index = arrayNum[counter];
@@ -84,10 +85,30 @@ const uiDisplay = () => {
 			element.textContent = answers[arrayCounter];
 			arrayCounter++;
 		});
+
+	} else {
+
 	}
 
 }
 
+/**
+ * 
+ * @param {*} answer  this parameter in the below function holds the id clicked
+ * the function below updates the array of answers picked
+ */
+
+const saveAnswer = (answer, counter) => {
+	console.log("answer : ", answer, "and counter : ", counter);
+	for (let i = 0; i < arrContent.length; i++) {
+		if (arrContent.length == counter) {
+			arrContent
+		}
+	}
+
+	console.log(arrContent);
+
+}
 
 
 
@@ -98,21 +119,65 @@ window.addEventListener("load", () => {
 /**
  * this holds the element button with value next and calls uiDisplay
  *  whenever the nextButton is clicked with the counter increasing
+ *  and saves the answer chosen to an array
  */
 const nextButton = document.querySelector('#next');
 nextButton.addEventListener("click", () => {
-	counter++;
+	const radioElements = document.querySelectorAll("input[type= radio]");
+	//to push the answer chosen to the arrContent array
+	radioElements.forEach((element) => {
+		if (element.checked == true) {
+			arrContent.push({
+				counterString: counter,
+				answer: element.id
+			});
+		}
+	});
+	console.log(arrContent);
+	if (counter < 5) {
+		counter++;
+	} else {
+		counter = counter;
+	}
 	uiDisplay();
+	/**
+	 * to cancel all checked properties
+	 */
+	radioElements.forEach((element) => {
+		element.checked = false;
+	});
 });
 
 /**
  * this holds the element button with value previous and calls uiDisplay
  *  whenever the previousButton is clicked with the counter decreasing
+ *  and removes the last saved answer
  */
 
 const previousButton = document.querySelector('#previous');
 previousButton.addEventListener("click", () => {
-	counter--;
+	/**
+	 * to make the answer chosen before reflect on the ui
+	 */
+	if (counter > 0) {
+		const arrContentLenght = arrContent.length;
+		const previousAnswer = arrContent[arrContentLenght - 1].answer;
+		console.log("previous answer : ", previousAnswer);
+		const radioElements = document.querySelectorAll("input[type= radio]");
+		radioElements.forEach((element) => {
+			if (element.id == previousAnswer) {
+				element.checked = true;
+			}
+		});
+
+		arrContent.pop(); // to remove the last answer chosen from the array
+		console.log(arrContent);
+		counter--; //go back to the previous question
+	} else {
+		counter = counter;
+	}
+
+
 	uiDisplay();
 })
 
