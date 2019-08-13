@@ -57,7 +57,8 @@ body .over-lay .main-over-lay {
 main .quiz-main .choice-answer .submit-button {
   display: flex;
   margin-top: 2em;
-  justify-content: center;
+  justify-content: space-around;
+  /* align-content: center; */
   align-items: center;
 }
 
@@ -67,7 +68,7 @@ main .quiz-main {
   padding-right: 1em;
 }
 
-.submit-button input[type="submit"] {
+.submit-button input[type="button"] {
   border-style: none;
   display: block;
   width: 100px;
@@ -94,7 +95,7 @@ body .over-lay .main-over-lay button {
   -o-transition-duration: .4s;
 }
 
-.submit-button input[type="submit"]:hover,
+.submit-button input[type="button"]:hover,
 body .over-lay .main-over-lay button:hover {
   background-color: brown;
   color: black;

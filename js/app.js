@@ -19,6 +19,7 @@
  *xmlhttp for the request of answers on the server;
  *
  */
+'use strict';
 let counter = 0;
 const urlQuestion = "json/question.json";
 const urlAnswer = "json/answer.json";
@@ -94,7 +95,7 @@ window.addEventListener("load", () => {
 		let loader = document.getElementsByClassName("loader-body")[0];
 		loader.style.display = "none";
 		document.getElementById("main").style.display = "flex";
-	}, 10000);
+	}, 3000);
 	uiDisplay();
 });
 
@@ -220,7 +221,7 @@ const submitAll = () => {
 	}
 	const overLay = document.querySelector(".over-lay");
 	const scoreField = document.querySelector("#score");
-	scoreField.textContent = `Your Score is ${score}`;
+	scoreField.textContent = `Your Score is ${score} / ${arrayNum.length}`;
 	overLay.style.display = "flex";
 	console.log("score : ", score);
 	console.log("answer : ", answer);
