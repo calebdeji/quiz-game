@@ -221,9 +221,28 @@ const submitAll = () => {
 	const overLay = document.querySelector(".over-lay");
 	const scoreField = document.querySelector("#score");
 	scoreField.textContent = `Your Score is ${score}`;
-	overLay.style.display = "block";
+	overLay.style.display = "flex";
 	console.log("score : ", score);
 	console.log("answer : ", answer);
 	console.log("answers chosen : ", answersChosen);
 };
 console.log(arrayNum);
+
+/**
+ * what happens to replay button
+ */
+const replayButton = document.querySelector("#replay");
+replayButton.addEventListener("click", () => {
+	location.reload();
+});
+/**
+ * what happens to close button
+ */
+const closeButton = document.querySelector("#close");
+closeButton.addEventListener("click", () => {
+	if (window.confirm("Do you really want to stop playing?")) {
+		window.close();
+	} else {
+		window.reload();
+	}
+})
