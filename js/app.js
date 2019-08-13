@@ -233,7 +233,8 @@ replayButton.addEventListener("click", () => {
  */
 const closeButton = document.querySelector("#close");
 closeButton.addEventListener("click", () => {
-	if (window.confirm("Do you really want to stop playing?")) {
+	if (window.confirm("You want to stop playing? Press ok to stop and cancel to play again")) {
+		document.write("");
 		window.close();
 	} else {
 		window.reload();
