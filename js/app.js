@@ -245,7 +245,7 @@ window.addEventListener("load", async () => {
 		let loader = document.getElementsByClassName("loader-body")[0];
 		loader.style.display = "none";
 		document.getElementById("main").style.display = "flex";
-	}, 3000);
+	}, 10000);
 	await getApi();
 	await getAnswerApi();
 	uiDisplay();
