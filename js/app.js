@@ -15,8 +15,6 @@
 /*
  *
  * To receive the set of questions and respective anwsers from the json file on the server;
- * xmlhttp for the request of questions on the server
- *xmlhttp for the request of answers on the server;
  *
  */
 "use strict";
