@@ -16,7 +16,7 @@ body {
 main {
   background-color: burlywood;
   margin-top: 3em;
-  /* display: none; */
+  display: none;
   width: 600px;
   height: 400px;
   justify-content: center;

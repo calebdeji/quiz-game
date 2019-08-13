@@ -90,6 +90,11 @@ const uiDisplay = () => {
 };
 
 window.addEventListener("load", () => {
+	setTimeout(() => {
+		let loader = document.getElementsByClassName("loader-body")[0];
+		loader.style.display = "none";
+		document.getElementById("main").style.display = "flex";
+	}, 10000);
 	uiDisplay();
 });
 
