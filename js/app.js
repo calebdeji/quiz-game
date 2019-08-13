@@ -8,6 +8,7 @@
  *	*Github : https://github.com/calebdeji
  *	*Dev.to : https://dev.to/calebdeji
  *  *website : https://calebdeji.github.io
+ * 	*blog : https://calebdeji.hashnode.dev
  *
  **/
 /*************************************** */
