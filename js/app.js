@@ -79,7 +79,7 @@ for (let counter = 0; counter < 4; counter++) {
 /* *************************************************************** */
 
 /**
- * the below function changes the data on the ui
+ * the function changes the data on the ui
  */
 const uiDisplay = () => {
 	if (counter < 5 && counter >= 0) {
