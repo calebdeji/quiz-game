@@ -18,11 +18,16 @@ main {
   margin-top: 3em;
   display: none;
   width: 600px;
-  height: 400px;
+  height: auto;
+  padding-bottom: 1em;
   justify-content: center;
   /* align-content: center; */
   align-items: center;
   flex-direction: column;
+}
+
+main h2 {
+  text-align: center;
 }
 
 main .quiz-main {
@@ -57,9 +62,13 @@ body .over-lay .main-over-lay {
 main .quiz-main .choice-answer .submit-button {
   display: flex;
   margin-top: 2em;
-  justify-content: space-between;
+  justify-content: space-around;
   /* align-content: center; */
   align-items: center;
+}
+
+main .quiz-main .choice-answer div {
+  margin-top: 1em;
 }
 
 main .quiz-main {
@@ -247,4 +256,13 @@ body div.loader-body .loader {
     transform: rotate(360deg);
   }
 }
-@media screen and (max-width:800px) {}
+@media screen and (max-width:600px) {
+  body .over-lay {
+    width: 100%;
+  }
+}
+@media screen and (max-height:500px) {
+  body .over-lay {
+    height: 100%;
+  }
+}

@@ -1,85 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="title" content="Game Quiz" />
+    <meta name="description" content="A simple web app game quiz" />
+    <meta
+      name="keywords"
+      content="mcq, multiple choice question, game, quiz game, mcq game, calebdeji project, ogunwale pelumi caleb,calebdeji"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <link rel="stylesheet" href="./css/app.css" />
+    <link rel="shortcut icon" href="./images/favi.png" type="image/x-icon" />
+    <title>Quiz Game</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<meta name="title" content="Game Quiz">
-	<meta name="description" content="A simple web app game quiz">
-	<meta name="keywords"
-		content="mcq, multiple choice question, game, quiz game, mcq game, calebdeji project, ogunwale pelumi caleb,calebdeji">
-	<meta name="robots" content="index, follow">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="language" content="English">
-	<link rel="stylesheet" href="./css/app.css" />
-	<link rel="shortcut icon" href="./images/favi.png" type="image/x-icon">
-	<title>Quiz Game</title>
-</head>
-
-<body>
-	<script>
-		/*
-		 * This makes the web page to occupt the whole browser
-		 */
-		let heightVar = window.innerHeight;
-		let bodyVar = document.getElementsByTagName("body");
-		bodyVar[0].style.height = heightVar + "px";
-		/*
-		 ***************************************
-		 */
-	</script>
-	<!--------------------------------------- Preloader section ---------------------- -->
-	<div class="loader-body">
-		<div class="loader"></div>
-	</div>
-	<!--------------------------------------- Preloader ends-------------------- ------ -->
-	<!-------------------------- the displays the questions and answers---------------- -->
-	<main id="main" class="w3-animate-zoom">
-		<h2>Your Favourite Quiz Game</h2>
-		<div class="quiz-main">
-			<h4 class="question w3-animate-right" id="question"></h4>
-			<div class="choice-answer">
-				<form action="javascript:void(0)" method="post">
-					<div>
-						<input type="radio" name="choice-answer" id="first" value="" />
-						<p class="input w3-animate-left"></p>
-					</div>
-					<div>
-						<input type="radio" name="choice-answer" id="second" value="" />
-						<p class="input w3-animate-right"></p>
-					</div>
-					<div>
-						<input type="radio" name="choice-answer" id="third" value="" />
-						<p class="input w3-animate-left"></p>
-					</div>
-					<div>
-						<input type="radio" name="choice-answer" id="fourth" value="" />
-						<p class="input w3-animate-left"></p>
-					</div>
-					<div class="submit-button">
-						<input type="button" value="Next" id="next" />
-						<input type="button" value="previous" id="previous" />
-					</div>
-				</form>
-			</div>
-		</div>
-	</main>
-	<!------------------------------------main ends ------------------------------------------ -->
-	<!------- -----------------------------------------------------------------------------------
+  <body>
+    <script>
+      /*
+       * This makes the web page to occupt the whole browser
+       */
+      let heightVar = window.innerHeight;
+      let bodyVar = document.getElementsByTagName("body");
+      bodyVar[0].style.height = heightVar + "px";
+      /*
+       ***************************************
+       */
+    </script>
+    <!--------------------------------------- Preloader section ---------------------- -->
+    <div class="loader-body">
+      <div class="loader"></div>
+    </div>
+    <!--------------------------------------- Preloader ends-------------------- ------ -->
+    <!-------------------------- the displays the questions and answers---------------- -->
+    <main id="main" class="w3-animate-zoom">
+      <h2>Your Favourite Quiz Game</h2>
+      <div class="quiz-main">
+        <h4 class="question w3-animate-right" id="question"></h4>
+        <div class="choice-answer">
+          <form action="javascript:void(0)" method="post">
+            <div>
+              <input type="radio" name="choice-answer" id="first" value="" />
+              <p class="input w3-animate-left"></p>
+            </div>
+            <div>
+              <input type="radio" name="choice-answer" id="second" value="" />
+              <p class="input w3-animate-right"></p>
+            </div>
+            <div>
+              <input type="radio" name="choice-answer" id="third" value="" />
+              <p class="input w3-animate-left"></p>
+            </div>
+            <div>
+              <input type="radio" name="choice-answer" id="fourth" value="" />
+              <p class="input w3-animate-left"></p>
+            </div>
+            <div class="submit-button">
+              <input type="button" value="Next" id="next" />
+              <input type="button" value="previous" id="previous" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <!------------------------------------main ends ------------------------------------------ -->
+    <!------- -----------------------------------------------------------------------------------
 		modal that displays after answering all questions, display initially set to none 
 	--------------------------------------------------------------------------------------------->
-	<div class="over-lay w3-animate-zoom">
-		<h2 id="score"></h2>
-		<p>Would You Like To Quit or Play Again?</p>
-		<div class="main-over-lay">
-			<button id="replay">Yay! Play Again!</button>
-			<button id="close">Nah, I'm good</button>
-		</div>
-	</div>
-	<!-------------------------------- script section -------------------------------------------->
-	<script src="js/app.js"></script>
-	<!------------------------------- script section ends ---------------------------------------->
-</body>
-
+    <div class="over-lay w3-animate-zoom">
+      <h2 id="score"></h2>
+      <p>Would You Like To Quit or Play Again?</p>
+      <div class="main-over-lay">
+        <button id="replay">Yay! Play Again!</button>
+        <button id="close">Nah, I'm good</button>
+      </div>
+    </div>
+    <!-------------------------------- script section -------------------------------------------->
+    <script src="./js/app.js"></script>
+    <!------------------------------- script section ends ---------------------------------------->
+  </body>
 </html>

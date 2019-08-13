@@ -19,33 +19,44 @@
  *xmlhttp for the request of answers on the server;
  *
  */
-'use strict';
+"use strict";
 let counter = 0;
-const urlQuestion = "json/question.json";
+const urlQuestion = "/json/question.json";
 const urlAnswer = "json/answer.json";
 let arrayQuestions;
 let arrAnswer;
-fetch(urlQuestion)
-	.then(response => {
-		return response.json();
-	})
-	.then(data => {
-		arrayQuestions = data;
-	})
-	.catch(err => {
-		console.log("Unable to fetch for questions");
+/**
+ * function to return a promise of the fetched questions
+ */
+const fetchApi = () => {
+	const response = fetch('json/question.json');
+	return new Promise((resolve, reject) => {
+		resolve(response.then((data) => data.json()));
+		reject((err) => console.log("unable to fetch question api"))
 	});
-fetch(urlAnswer)
-	.then(response => {
-		return response.json();
+}
+/**
+ * to update the arrayQuestions variable
+ */
+const getApi = async () => {
+	arrayQuestions = await fetchApi();
+}
+/**
+ * function to return a promise of the fetched answers
+ */
+const fetchAnswerApi = () => {
+	const response = fetch('json/answer.json');
+	return new Promise((resolve, reject) => {
+		resolve(response.then((data) => data.json()));
+		reject((err) => console.log("unable to fetch answer api"));
 	})
-	.then(data => {
-		arrAnswer = data;
-	})
-	.catch(err => {
-		console.log("Unable to fetch answers");
-	});
-
+}
+/**
+ * to update the arrAnswer variable
+ */
+const getAnswerApi = async () => {
+	arrAnswer = await fetchAnswerApi();
+}
 /*==========*********************************************************================ */
 let arrContent = []; //this holds the answer picked by the user
 /**
@@ -85,19 +96,9 @@ const uiDisplay = () => {
 			arrayCounter++;
 		});
 	} else {
-
 		submitAll();
 	}
 };
-
-window.addEventListener("load", () => {
-	setTimeout(() => {
-		let loader = document.getElementsByClassName("loader-body")[0];
-		loader.style.display = "none";
-		document.getElementById("main").style.display = "flex";
-	}, 3000);
-	uiDisplay();
-});
 
 /**
  * this holds the element button with value next and calls uiDisplay
@@ -106,13 +107,12 @@ window.addEventListener("load", () => {
  */
 const nextButton = document.querySelector("#next");
 nextButton.addEventListener("click", () => {
-	console.log(arrContent);
-	console.log("counter : ", counter);
 	if (counter < 5) {
 		const radioElements = document.querySelectorAll("input[type= radio]");
 		//to push the answer chosen to the arrContent array
 		/**
 		 * the below variable to hold an increment if any answer was chosen
+		 * it is initialized to deal with unanswered question
 		 */
 		let holderAnswer = 0;
 		radioElements.forEach(element => {
@@ -122,7 +122,6 @@ nextButton.addEventListener("click", () => {
 					answer: element.id
 				});
 				holderAnswer++;
-				console.log("holderANswer : ", holderAnswer);
 			}
 		});
 		/**
@@ -133,7 +132,6 @@ nextButton.addEventListener("click", () => {
 				counterString: counter,
 				answer: "unanswered"
 			});
-			console.log("holderANswer == 0 : ", holderAnswer);
 		}
 		counter++;
 		uiDisplay();
@@ -141,7 +139,6 @@ nextButton.addEventListener("click", () => {
 			nextButton.value = "Submit";
 		}
 	}
-
 
 	/**
 	 * to cancel all checked properties
@@ -151,7 +148,6 @@ nextButton.addEventListener("click", () => {
 		element.checked = false;
 	});
 });
-
 
 /**
  * this holds the element button with value previous and calls uiDisplay
@@ -223,11 +219,7 @@ const submitAll = () => {
 	const scoreField = document.querySelector("#score");
 	scoreField.textContent = `Your Score is ${score} / ${arrayNum.length}`;
 	overLay.style.display = "flex";
-	console.log("score : ", score);
-	console.log("answer : ", answer);
-	console.log("answers chosen : ", answersChosen);
 };
-console.log(arrayNum);
 
 /**
  * what happens to replay button
@@ -246,4 +238,15 @@ closeButton.addEventListener("click", () => {
 	} else {
 		window.reload();
 	}
-})
+});
+
+window.addEventListener("load", async () => {
+	setTimeout(() => {
+		let loader = document.getElementsByClassName("loader-body")[0];
+		loader.style.display = "none";
+		document.getElementById("main").style.display = "flex";
+	}, 3000);
+	await getApi();
+	await getAnswerApi();
+	uiDisplay();
+});
