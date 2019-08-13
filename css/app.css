@@ -57,7 +57,7 @@ body .over-lay .main-over-lay {
 main .quiz-main .choice-answer .submit-button {
   display: flex;
   margin-top: 2em;
-  justify-content: space-around;
+  justify-content: space-between;
   /* align-content: center; */
   align-items: center;
 }
