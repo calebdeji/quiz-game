@@ -67,34 +67,27 @@ for (let counter = 0; counter < 4; counter++) {
 
 /* *************************************************************** */
 
-
 /**
  * the below function changes the data on the ui
  */
 const uiDisplay = () => {
-
 	if (counter < 5 && counter >= 0) {
 		let arrayCounter = 0;
 		const index = arrayNum[counter];
 		const question = arrayQuestions[index].question;
 		const answers = arrayQuestions[index].answers;
-		const questionFieldElement = document.getElementById('question');
+		const questionFieldElement = document.getElementById("question");
 		const answersFieldELement = document.querySelectorAll(".input");
 		questionFieldElement.textContent = question;
 		answersFieldELement.forEach(element => {
 			element.textContent = answers[arrayCounter];
 			arrayCounter++;
 		});
-
 	} else {
 
+		submitAll();
 	}
-
-}
-
-
-
-
+};
 
 window.addEventListener("load", () => {
 	uiDisplay();
@@ -105,32 +98,54 @@ window.addEventListener("load", () => {
  *  whenever the nextButton is clicked with the counter increasing
  *  and saves the answer chosen to an array
  */
-const nextButton = document.querySelector('#next');
+const nextButton = document.querySelector("#next");
 nextButton.addEventListener("click", () => {
-	const radioElements = document.querySelectorAll("input[type= radio]");
-	//to push the answer chosen to the arrContent array
-	radioElements.forEach((element) => {
-		if (element.checked == true) {
+	console.log(arrContent);
+	console.log("counter : ", counter);
+	if (counter < 5) {
+		const radioElements = document.querySelectorAll("input[type= radio]");
+		//to push the answer chosen to the arrContent array
+		/**
+		 * the below variable to hold an increment if any answer was chosen
+		 */
+		let holderAnswer = 0;
+		radioElements.forEach(element => {
+			if (element.checked == true) {
+				arrContent.push({
+					counterString: counter,
+					answer: element.id
+				});
+				holderAnswer++;
+				console.log("holderANswer : ", holderAnswer);
+			}
+		});
+		/**
+		 * to handle unanswered questions
+		 */
+		if (holderAnswer == 0) {
 			arrContent.push({
 				counterString: counter,
-				answer: element.id
+				answer: "unanswered"
 			});
+			console.log("holderANswer == 0 : ", holderAnswer);
 		}
-	});
-	console.log(arrContent);
-	if (counter < 5) {
 		counter++;
-	} else {
-		counter = counter;
+		uiDisplay();
+		if (counter == 4) {
+			nextButton.value = "Submit";
+		}
 	}
-	uiDisplay();
+
+
 	/**
 	 * to cancel all checked properties
 	 */
-	radioElements.forEach((element) => {
+	const radioElements = document.querySelectorAll("input[type= radio]");
+	radioElements.forEach(element => {
 		element.checked = false;
 	});
 });
+
 
 /**
  * this holds the element button with value previous and calls uiDisplay
@@ -138,7 +153,7 @@ nextButton.addEventListener("click", () => {
  *  and removes the last saved answer
  */
 
-const previousButton = document.querySelector('#previous');
+const previousButton = document.querySelector("#previous");
 previousButton.addEventListener("click", () => {
 	/**
 	 * to make the answer chosen before reflect on the ui
@@ -146,23 +161,64 @@ previousButton.addEventListener("click", () => {
 	if (counter > 0) {
 		const arrContentLenght = arrContent.length;
 		const previousAnswer = arrContent[arrContentLenght - 1].answer;
-		console.log("previous answer : ", previousAnswer);
 		const radioElements = document.querySelectorAll("input[type= radio]");
-		radioElements.forEach((element) => {
+		radioElements.forEach(element => {
 			if (element.id == previousAnswer) {
 				element.checked = true;
 			}
 		});
-
 		arrContent.pop(); // to remove the last answer chosen from the array
-		console.log(arrContent);
 		counter--; //go back to the previous question
 	} else {
 		counter = counter;
 	}
-
-
 	uiDisplay();
-})
+	if (counter !== 4) {
+		const nextButton = document.querySelector("#next");
+		nextButton.value = "Next";
+	}
+});
 
+const submitAll = () => {
+	/**
+	 * this holds the corresponding answers to random questions generated
+	 */
+	let answer = [];
+	/**
+	 * the holds the answers chosen by the user
+	 */
+	let answersChosen = [];
+	for (let i = 0; i < 5; i++) {
+		answer.push(arrAnswer[arrayNum[i]].answer);
+		answersChosen.push(arrContent[i].answer);
+	}
+
+	/**
+	 * to compare the two arrays
+	 */
+	let score = 0; //this holds the score of the user
+	/**
+	 * double loop
+	 */
+	for (
+		let answerELement = 0; answerELement < answersChosen.length; answerELement++
+	) {
+		for (
+			let answersChosenElement = 0; answersChosenElement < answersChosen.length; answersChosenElement++
+		) {
+			if (answerELement == answersChosenElement) {
+				if (answer[answerELement] == answersChosen[answersChosenElement]) {
+					score++;
+				}
+			}
+		}
+	}
+	const overLay = document.querySelector(".over-lay");
+	const scoreField = document.querySelector("#score");
+	scoreField.textContent = `Your Score is ${score}`;
+	overLay.style.display = "block";
+	console.log("score : ", score);
+	console.log("answer : ", answer);
+	console.log("answers chosen : ", answersChosen);
+};
 console.log(arrayNum);
