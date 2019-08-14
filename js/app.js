@@ -241,12 +241,12 @@ closeButton.addEventListener("click", () => {
 });
 
 window.addEventListener("load", async () => {   
+	await getApi();
+	await getAnswerApi();
+	uiDisplay();
 	setTimeout(() => {
 		let loader = document.getElementsByClassName("loader-body")[0];
 		loader.style.display = "none";
 		document.getElementById("main").style.display = "flex";
 	}, 10000);
-	await getApi();
-	await getAnswerApi();
-	uiDisplay();
 });
