@@ -28,34 +28,34 @@ let arrAnswer;
  * function to return a promise of the fetched questions
  */
 const fetchApi = () => {
-	const response = fetch('json/question.json');
+	const response = fetch("json/question.json");
 	return new Promise((resolve, reject) => {
-		resolve(response.then((data) => data.json()));
-		reject((err) => console.log("unable to fetch question api"))
+		resolve(response.then(data => data.json()));
+		reject(err => console.log("unable to fetch question api"));
 	});
-}
+};
 /**
  * to update the arrayQuestions variable
  */
 const getApi = async () => {
 	arrayQuestions = await fetchApi();
-}
+};
 /**
  * function to return a promise of the fetched answers
  */
 const fetchAnswerApi = () => {
-	const response = fetch('json/answer.json');
+	const response = fetch("json/answer.json");
 	return new Promise((resolve, reject) => {
-		resolve(response.then((data) => data.json()));
-		reject((err) => console.log("unable to fetch answer api"));
-	})
-}
+		resolve(response.then(data => data.json()));
+		reject(err => console.log("unable to fetch answer api"));
+	});
+};
 /**
  * to update the arrAnswer variable
  */
 const getAnswerApi = async () => {
 	arrAnswer = await fetchAnswerApi();
-}
+};
 /*==========*********************************************************================ */
 let arrContent = []; //this holds the answer picked by the user
 /**
@@ -232,7 +232,11 @@ replayButton.addEventListener("click", () => {
  */
 const closeButton = document.querySelector("#close");
 closeButton.addEventListener("click", () => {
-	if (window.confirm("You want to stop playing? Press ok to stop and cancel to play again")) {
+	if (
+		window.confirm(
+			"You want to stop playing? Press ok to stop and cancel to play again"
+		)
+	) {
 		document.write("");
 		window.close();
 	} else {
@@ -240,13 +244,11 @@ closeButton.addEventListener("click", () => {
 	}
 });
 
-window.addEventListener("load", async () => {   
+window.addEventListener("load", async () => {
 	await getApi();
 	await getAnswerApi();
 	uiDisplay();
-	setTimeout(() => {
-		let loader = document.getElementsByClassName("loader-body")[0];
-		loader.style.display = "none";
-		document.getElementById("main").style.display = "flex";
-	}, 10000);
+	let loader = document.getElementsByClassName("loader-body")[0];
+	loader.style.display = "none";
+	document.getElementById("main").style.display = "flex";
 });
