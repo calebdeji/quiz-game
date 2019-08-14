@@ -240,7 +240,7 @@ closeButton.addEventListener("click", () => {
 	}
 });
 
-window.addEventListener("load", async () => {
+window.addEventListener("load", async () => {   
 	setTimeout(() => {
 		let loader = document.getElementsByClassName("loader-body")[0];
 		loader.style.display = "none";
